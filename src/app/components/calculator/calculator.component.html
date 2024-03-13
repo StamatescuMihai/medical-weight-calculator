@@ -1,6 +1,44 @@
 <div class="page-container">
-    <mat-form-field class="example-full-width">
-        <mat-label>Nume</mat-label>
-        <input matInput [(ngModel)]="name" required>
-    </mat-form-field>
+    <div class="form-container">
+        <!--<mat-form-field>
+            <mat-label>Nume</mat-label>
+            <input matInput [(ngModel)]="athlete.name">
+        </mat-form-field>-->
+        <mat-form-field>
+            <mat-label>Greutate (kg)</mat-label>
+            <input matInput [(ngModel)]="athlete.weight" required [formControl]="formControl" type="number">
+        </mat-form-field>
+        <mat-form-field *ngFor="let i of [1, 2, 3, 4, 5]">
+            <mat-label>Plica {{i}}</mat-label>
+                <input matInput [(ngModel)]="athlete.plici[i-1]" required [formControl]="formControl1" type="number">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Suprafata Corporala</mat-label>
+            <input matInput [(ngModel)]="athlete.bodysurface" required [formControl]="formControl2" type="number">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>X (%)</mat-label>
+            <input matInput [(ngModel)]="athlete.X" required [formControl]="formControl3" type="number">
+        </mat-form-field>
+    </div>
+    <div class="result-container">
+        <h2>Rezultate</h2>
+        <div class="results" *ngIf="!hasErrors()">
+            <p>Tesut adipos (%): {{calculateResults().bodyfatP}}</p>
+            <p>Tesut adipos (Kg): {{calculateResults().bodyfatKg}}</p>
+            <p>Masa activa (Kg): {{calculateResults().activeMass}}</p>
+            <p>Greutate optima (Kg): {{calculateResults().optimalWeight}}</p>
+            <p>Tesut adipos optim (kg): {{calculateResults().optimalBodyfatKg}}</p>
+        </div>
+        <div class="results" *ngIf="hasErrors()">
+            <p>Completeaza toate campurile</p>
+        </div>
+    </div>
+</div>
+<div class="refresh-container">
+    <button mat-mini-fab color="disabled" (click)="onReset()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+</div>
+<div class="filler-container">
 </div>
